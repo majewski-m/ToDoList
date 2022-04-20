@@ -15,8 +15,8 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` VALUES
-	(1,'john.williams@gmail.com','password', 'John', 'Williams'),
-	(2,'james.smith@gmail.com','password', 'James', 'Smith'),
-	(3,'jacob.brown@gmail.com','password', 'Jacob', 'Brown');
+	(1,'john.williams@gmail.com','$2a$12$nNTKUmxK7b/ut9jGoSXyDu0pTIZHkNfMb3Ust3SNbyUZwt.SemLwq', 'John', 'Williams'),
+	(2,'james.smith@gmail.com','$2a$12$nNTKUmxK7b/ut9jGoSXyDu0pTIZHkNfMb3Ust3SNbyUZwt.SemLwq', 'James', 'Smith'),
+	(3,'jacob.brown@gmail.com','$2a$12$nNTKUmxK7b/ut9jGoSXyDu0pTIZHkNfMb3Ust3SNbyUZwt.SemLwq', 'Jacob', 'Brown');
 
 UNLOCK TABLES;
