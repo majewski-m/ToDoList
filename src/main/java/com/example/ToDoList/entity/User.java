@@ -1,6 +1,8 @@
 package com.example.ToDoList.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -19,6 +21,9 @@ public class User {
 
 	public User() {
 	}
+
+	@OneToMany(mappedBy = "user")
+	private List<Item> items = new ArrayList<>();
 
 	public User(String email, String password, String firstName, String lastName) {
 		this.email = email;
@@ -65,6 +70,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 	@Override
