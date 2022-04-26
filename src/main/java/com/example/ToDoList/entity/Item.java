@@ -20,7 +20,7 @@ public class Item {
 
 	private String priority;
 
-	private boolean completed;
+	private String status;
 
 	@ManyToOne()
 	@JoinColumn(name = "user_id")
@@ -29,11 +29,11 @@ public class Item {
 	public Item() {
 	}
 
-	public Item(String title, LocalDate dueDate, String priority, boolean completed, User user) {
+	public Item(String title, LocalDate dueDate, String priority, String status, User user) {
 		this.title = title;
 		this.dueDate = dueDate;
 		this.priority = priority;
-		this.completed = completed;
+		this.status = status;
 		this.user = user;
 	}
 
@@ -69,12 +69,12 @@ public class Item {
 		this.priority = priority;
 	}
 
-	public boolean isCompleted() {
-		return completed;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public User getUser() {
@@ -92,7 +92,7 @@ public class Item {
 				", title='" + title + '\'' +
 				", dueDate=" + dueDate +
 				", priority='" + priority + '\'' +
-				", completed=" + completed +
+				", status='" + status + '\'' +
 				", user=" + user +
 				'}';
 	}
