@@ -14,53 +14,33 @@
 	<div class="row">
 		<div class="col-sm">
 			<div class="card-header">
-				Featured
+				TO DO
 			</div>
-			<div class="card text-white bg-danger mb-3">
-
+			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
+				 th:if="${item.status} == 'TODO' and ${item.user.id} == ${userId}">
 				<div class="card-body">
 					<a class="stretched-link" href="/"></a>
-					<h5 class="card-title">Card title</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
+					<h5 class="card-title" th:text="${item.name}"></h5>
+					<h6 class="card-subtitle mb-2 text-muted"
+						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
+					<p class="card-text" th:text="${item.priority}"></p>
 					<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">Go somewhere</a>
 					<a href="#" class="btn btn-secondary">Go somewhere</a>
 				</div>
 			</div>
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
-					<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">Go somewhere
-					</button>
-					<a href="#" class="btn btn-secondary">Go somewhere</a>
-				</div>
-			</div>
 		</div>
 		<div class="col-sm">
 			<div class="card-header">
-				Featured
+				DOING
 			</div>
-			<div class="card text-white bg-danger mb-3">
+			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
+				 th:if="${item.status} == 'DOING' and ${item.user.id} == ${userId}">
 
 				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-					<a href="#" class="btn btn-secondary">Go somewhere</a>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
+					<h5 class="card-title" th:text="${item.name}"></h5>
+					<h6 class="card-subtitle mb-2 text-muted"
+						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
+					<p class="card-text" th:text="${item.priority}"></p>
 					<a href="#" class="btn btn-primary">Go somewhere</a>
 					<a href="#" class="btn btn-secondary">Go somewhere</a>
 				</div>
@@ -68,25 +48,16 @@
 		</div>
 		<div class="col-sm">
 			<div class="card-header">
-				Featured
+				DONE
 			</div>
-			<div class="card text-white bg-danger mb-3">
+			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
+				 th:if="${item.status} == 'DONE' and ${item.user.id} == ${userId}">
 
 				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-					<a href="#" class="btn btn-secondary">Go somewhere</a>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
+					<h5 class="card-title" th:text="${item.name}"></h5>
+					<h6 class="card-subtitle mb-2 text-muted"
+						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
+					<p class="card-text" th:text="${item.priority}"></p>
 					<a href="#" class="btn btn-primary">Go somewhere</a>
 					<a href="#" class="btn btn-secondary">Go somewhere</a>
 				</div>
@@ -94,6 +65,46 @@
 		</div>
 	</div>
 </div>
+
+<table class="table table-bordered" style="float: left;">
+	<tr>
+		<th>Title</th>
+		<th>Due Date</th>
+		<th>Priority</th>
+		<th>Status</th>
+		<th>User ID</th>
+		<th>Action</th>
+	</tr>
+	<tbody>
+
+
+	<tr th:each="item : ${items}">
+
+		<td th:text="${item.name}"></td>
+		<td th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}"></td>
+		<td th:text="${item.priority}"></td>
+		<td th:text="${item.status}"></td>
+		<td th:text="${item.user.id}"></td>
+		<!--		<td>-->
+		<!--			<a th:href="@{/showFormForUpdate(id=${item.id})}" class="btn btn-primary">-->
+		<!--				Update-->
+		<!--			</a>-->
+		<!--			<a th:href="@{/delete(id=${item.id})}"-->
+		<!--			   onclick="if (!(confirm('Are you sure you want to delete this item?'))) return false"-->
+		<!--			   class="btn btn-warning">-->
+		<!--				Delete-->
+		<!--			</a>-->
+		<!--		</td>-->
+		<!--		<td>-->
+		<!--			<a th:href="@{/changeStatus(id=${todoItem.id})}" class="btn btn-info">-->
+		<!--				Change Status-->
+		<!--			</a>-->
+		<!--		</td>-->
+
+	</tr>
+	</tbody>
+</table>
+
 <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">

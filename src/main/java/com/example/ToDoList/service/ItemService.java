@@ -1,6 +1,7 @@
 package com.example.ToDoList.service;
 
 import com.example.ToDoList.entity.Item;
+import com.example.ToDoList.entity.User;
 import com.example.ToDoList.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

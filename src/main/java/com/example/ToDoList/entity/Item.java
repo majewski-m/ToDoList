@@ -13,7 +13,7 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String title;
+	private String name;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dueDate;
@@ -29,8 +29,8 @@ public class Item {
 	public Item() {
 	}
 
-	public Item(String title, LocalDate dueDate, String priority, String status, User user) {
-		this.title = title;
+	public Item(String name, LocalDate dueDate, String priority, String status, User user) {
+		this.name = name;
 		this.dueDate = dueDate;
 		this.priority = priority;
 		this.status = status;
@@ -45,12 +45,12 @@ public class Item {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public LocalDate getDueDate() {
@@ -89,7 +89,7 @@ public class Item {
 	public String toString() {
 		return "Item{" +
 				"id=" + id +
-				", title='" + title + '\'' +
+				", title='" + name + '\'' +
 				", dueDate=" + dueDate +
 				", priority='" + priority + '\'' +
 				", status='" + status + '\'' +

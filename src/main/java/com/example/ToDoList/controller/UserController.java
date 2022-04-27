@@ -1,7 +1,7 @@
 package com.example.ToDoList.controller;
 
 import com.example.ToDoList.entity.User;
-import com.example.ToDoList.repository.UserRepository;
+import com.example.ToDoList.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@GetMapping("")
 	public String viewHomePage() {
@@ -35,7 +35,7 @@ public class UserController {
 		String encodedPassword = encoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
 
-		userRepository.save(user);
+		userService.save(user);
 
 		return "signup_success";
 	}

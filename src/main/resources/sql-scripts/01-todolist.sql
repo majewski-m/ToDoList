@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `items`;
 
 CREATE TABLE `items` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(100) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
   `due_date` DATE NOT NULL,
   `priority` VARCHAR(20) NOT NULL,
   `completed` VARCHAR(20) NOT NULL,
@@ -46,9 +46,9 @@ CREATE TABLE `items` (
 LOCK TABLES `items` WRITE;
 
 INSERT INTO `items` VALUES
-	(1, 'Create database', '2022-04-20', 'CRITICAL', true, 1),
-	(2, 'Write project logic', '2022-04-23', 'IMPORTANT', false, 1),
-    (3, 'Test the project', '2022-04-29', 'LOW', false, 2);
+	(1, 'Create database', '2022-04-20', 'CRITICAL', 'DONE', 1),
+	(2, 'Write project logic', '2022-04-23', 'IMPORTANT', 'DOING', 1),
+    (3, 'Test the project', '2022-04-29', 'LOW', 'TODO', 2);
 
 UNLOCK TABLES;
 
