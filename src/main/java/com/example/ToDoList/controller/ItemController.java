@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -28,16 +28,38 @@ public class ItemController {
 
 		List<Item> items = itemService.findAllByOrderByDateAsc();
 
-		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+//		Long userId = userService.findIdOfCurrentUser();
 
-		User user = userService.findUserByEmail(email);
-
+		Long userId = 1L; //TODO: DELETE IT AFTER TESTING
 
 		model.addAttribute("items", items);
-		model.addAttribute("userId", user.getId());
-
-		System.out.println(user.getId());
+		model.addAttribute("userId", userId);
 
 		return "list";
 	}
+
+	@PostMapping("/new")
+	public String saveItem(Item item) {
+
+		itemService.save(item);
+
+		return "redirect:/list";
+	}
+	@RequestMapping(value = {"/update"}, method={RequestMethod.PUT,RequestMethod.GET})
+	public String updateItem(@RequestParam("id") Long id, Item item) {
+
+		itemService.save(item);
+
+		return "redirect:/list";
+	}
+
+	@GetMapping("/delete")
+	public String delete(@RequestParam("id") Long id) {
+
+		itemService.deleteById(id);
+
+		return "redirect:/list";
+	}
+
+
 }

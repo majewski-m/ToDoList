@@ -18,4 +18,11 @@ public class ItemService {
 		return itemRepository.findAllByOrderByDueDateAsc();
 	}
 
+	public  void save (Item item) {
+		itemRepository.save(item);
+	}
+
+	public void deleteById(Long id) {
+		itemRepository.deleteById(id);
+	}
 }

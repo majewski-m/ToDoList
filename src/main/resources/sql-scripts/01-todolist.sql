@@ -30,7 +30,7 @@ CREATE TABLE `items` (
   `name` VARCHAR(100) NOT NULL,
   `due_date` DATE NOT NULL,
   `priority` VARCHAR(20) NOT NULL,
-  `completed` VARCHAR(20) NOT NULL,
+  `status` VARCHAR(20) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   
