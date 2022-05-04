@@ -51,7 +51,7 @@ public class ItemController {
 
 		return "redirect:/list";
 	}
-	@RequestMapping(value = {"/update"}, method={RequestMethod.PUT,RequestMethod.GET})
+	@GetMapping("/update")
 	public String updateItem(Item item) {
 
 		itemService.save(item);
@@ -60,7 +60,7 @@ public class ItemController {
 	}
 
 	@GetMapping("/delete")
-	public String delete(@RequestParam("id") Long id) {
+	public String delete(Long id) {
 
 		itemService.deleteById(id);
 
