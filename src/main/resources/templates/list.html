@@ -22,7 +22,7 @@
 					<h6 class="card-subtitle mb-2 text-muted"
 						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
 					<p class="card-text" th:text="${item.priority}"></p>
-					<a class="btn btn-primary" id="buttonEdit" th:href="@{/update(id=${item.id})}">Edit</a>
+					<a class="btn btn-primary btnEdit" th:href="@{/getOne/(id=${item.id})}">Edit</a>
 					<a th:href="@{/delete(id=${item.id})}"
 					   data-bs-toggle="modal" data-bs-target="#delete-modal"
 					   class="btn btn-warning">Delete</a>
@@ -31,34 +31,39 @@
 		</div>
 		<div class="col-sm">
 			<div class="card-header">
-				DOING
+				TO DO
 			</div>
 			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
 				 th:if="${item.status} == 'DOING' and ${item.user.id} == ${userId}">
 				<div class="card-body">
+					<a class="stretched-link" href="/"></a>
 					<h5 class="card-title" th:text="${item.name}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted"
 						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
 					<p class="card-text" th:text="${item.priority}"></p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-					<a href="#" class="btn btn-secondary">Go somewhere</a>
+					<a class="btn btn-primary btnEdit" th:href="@{/getOne/(id=${item.id})}">Edit</a>
+					<a th:href="@{/delete(id=${item.id})}"
+					   data-bs-toggle="modal" data-bs-target="#delete-modal"
+					   class="btn btn-warning">Delete</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm">
 			<div class="card-header">
-				DONE
+				TO DO
 			</div>
 			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
 				 th:if="${item.status} == 'DONE' and ${item.user.id} == ${userId}">
-
 				<div class="card-body">
+					<a class="stretched-link" href="/"></a>
 					<h5 class="card-title" th:text="${item.name}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted"
 						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
 					<p class="card-text" th:text="${item.priority}"></p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-					<a href="#" class="btn btn-secondary">Go somewhere</a>
+					<a class="btn btn-primary btnEdit" th:href="@{/getOne/(id=${item.id})}">Edit</a>
+					<a th:href="@{/delete(id=${item.id})}"
+					   data-bs-toggle="modal" data-bs-target="#delete-modal"
+					   class="btn btn-warning">Delete</a>
 				</div>
 			</div>
 		</div>
@@ -116,12 +121,13 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form th:action="@{/new}" th:object="${item}" method="POST" style="max-width: 600px; margin: 0 auto;">
+				<form th:action="@{/new}" method="POST" style="max-width: 600px; margin: 0 auto;">
 					<div class="m-3">
 						<div class="form-group row m-3">
 							<label class="col-form-label col-4">Name</label>
 							<div class="col-8">
-								<input type="text" class="form-control" name="name" required minlength="1" maxlength="100">
+								<input type="text" class="form-control" name="name" required minlength="1"
+									   maxlength="100">
 							</div>
 						</div>
 						<div class="form-group row m-3">
@@ -133,12 +139,17 @@
 						<div class="form-group row m-3">
 							<label class="col-form-label col-4">Priority</label>
 							<div class="col-8">
-								<input type="text" class="form-control" name="priority" required minlength="1" maxlength="20">
-<!--								TODO:CHECKBOX-->
+								<select class="form-select" name="priority" required>
+									<option th:each="priority : ${T(com.example.ToDoList.entity.Priority).values()}"
+											th:value="${priority}"
+											th:text="${priority}"></option>
+								</select>
 							</div>
 						</div>
+
 						<input type="hidden" name="status" th:value="TODO"/>
 						<input type="hidden" name="user" th:value="${userId}"/>
+
 						<div>
 							<button type="submit" class="btn btn-primary">Add new item</button>
 						</div>
@@ -161,29 +172,34 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form th:action="@{/update}" th:object="${item}" method="PUT" style="max-width: 600px; margin: 0 auto;">
+				<form th:action="@{/update}" method="PUT" style="max-width: 600px; margin: 0 auto;">
+					<input type="hidden" id="idEdit" name="id" th:value="${itemId}"/>
 					<div class="m-3">
 						<div class="form-group row m-3">
-							<label class="col-form-label col-4"">Name</label>
+							<label class="col-form-label col-4">Name</label>
 							<div class="col-8">
-								<input type="text" class="form-control" id="nameEdit" name="nameEdit" required minlength="1" maxlength="100">
+								<input type="text" class="form-control" id="nameEdit" name="name" required minlength="1"
+									   maxlength="100">
 							</div>
 						</div>
 						<div class="form-group row m-3">
 							<label class="col-form-label col-4">Due Date</label>
 							<div class="col-8">
-								<input type="date" id="dueDateEdit" name="dueDateEdit" placeholder="Due date" required>
+								<input type="date" id="dueDateEdit" name="dueDate" placeholder="Due date" required>
 							</div>
 						</div>
 						<div class="form-group row m-3">
 							<label class="col-form-label col-4">Priority</label>
 							<div class="col-8">
-								<input type="text" class="form-control" id="priorityEdit" name="priorityEdit" required minlength="1" maxlength="20">
-								<!--								TODO:CHECKBOX-->
+								<select class="form-select" id="priorityEdit" name="priority" required>
+									<option th:each="priority : ${T(com.example.ToDoList.entity.Priority).values()}"
+											th:value="${priority}"
+											th:text="${priority}"></option>
+								</select>
 							</div>
 						</div>
-						<input type="hidden" id="statusEdit" name="statusEdit" th:value="TODO"/>
-						<input type="hidden" id="userEdit" name="userEdit" th:value="${userId}"/>
+						<input type="hidden" id="statusEdit" name="status" th:value="TODO"/>
+						<input type="hidden" id="userEdit" name="user" th:value="${userId}"/>
 						<div>
 							<button type="submit" class="btn btn-primary">Save item</button>
 						</div>
@@ -216,26 +232,6 @@
 	</div>
 </div>
 
-<!--<div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">-->
-<!--	<div class="modal-dialog modal-dialog-centered">-->
-<!--		<div class="modal-content">-->
-<!--			<div class="modal-header">-->
-<!--				<h5 class="modal-title" id="modal-title">Modal title</h5>-->
-<!--				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--			</div>-->
-<!--			<div class="modal-body">-->
-<!--				<p>Modal body text goes here.</p>-->
-<!--			</div>-->
-<!--			<div class="modal-footer">-->
-<!--				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--				<button type="button" class="btn btn-primary">Save changes</button>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</div>-->
-
-
-
 <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -251,14 +247,15 @@
 </script>
 <script type="text/javascript">
 	$('document').ready(function() {
-		$("#buttonEdit").on('click',function(event){
+		$(".btnEdit").on('click',function(event){
 
 			event.preventDefault();
 
 			var href = $(this).attr('href');
 
 			$.get(href, function(item, status){
-				$('#nameEdit').val(item.id)
+				$('#idEdit').val(item.id)
+				$('#nameEdit').val(item.name)
 				$('#dueDateEdit').val(item.dueDate)
 				$('#priorityEdit').val(item.priority)
 				$('#statusEdit').val(item.status)

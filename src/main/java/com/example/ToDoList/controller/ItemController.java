@@ -38,6 +38,12 @@ public class ItemController {
 		return "list";
 	}
 
+	@GetMapping("/getOne")
+	@ResponseBody
+	public Item getOne(Long id) {
+		return itemService.getOne(id);
+	}
+
 	@PostMapping("/new")
 	public String saveItem(Item item) {
 
@@ -46,7 +52,7 @@ public class ItemController {
 		return "redirect:/list";
 	}
 	@RequestMapping(value = {"/update"}, method={RequestMethod.PUT,RequestMethod.GET})
-	public String updateItem(@RequestParam("id") Long id, Item item) {
+	public String updateItem(Item item) {
 
 		itemService.save(item);
 

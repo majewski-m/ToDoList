@@ -1,12 +1,12 @@
 package com.example.ToDoList.service;
 
 import com.example.ToDoList.entity.Item;
-import com.example.ToDoList.entity.User;
 import com.example.ToDoList.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -18,11 +18,28 @@ public class ItemService {
 		return itemRepository.findAllByOrderByDueDateAsc();
 	}
 
-	public  void save (Item item) {
+	public Item getOne(Long id) {
+		Optional<Item> result = itemRepository.findById(id);
+
+		Item item = null;
+
+		if (result.isPresent()) {
+			item = result.get();
+		}
+		else {
+			throw new RuntimeException("Did not find item id - " + id);
+		}
+
+		return item;
+	}
+
+	public void save (Item item) {
 		itemRepository.save(item);
 	}
 
 	public void deleteById(Long id) {
 		itemRepository.deleteById(id);
 	}
+
+
 }
