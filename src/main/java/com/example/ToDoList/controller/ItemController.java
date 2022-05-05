@@ -35,6 +35,8 @@ public class ItemController {
 		model.addAttribute("items", items);
 		model.addAttribute("userId", userId);
 
+		model.addAttribute("status", getOne(1L).getStatus());
+
 		return "list";
 	}
 

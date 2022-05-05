@@ -12,28 +12,30 @@
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col col-sm" id="col-1">
+		<div class="col col-sm" id="col-todo">
 			<div class="card-header">
 				TO DO
 			</div>
 			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
-				 th:if="${item.status} == 'TODO' and ${item.user.id} == ${userId}" draggable="true" id="card-1">
+				 th:if="${item.status} == 'TODO' and ${item.user.id} == ${userId}" draggable="true" id="${item.id}"
+				 th:href="@{/getOne/(id=${item.id})}">
 				<div class="card-body">
 					<h5 class="card-title" th:text="${item.name}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted"
 						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
 					<p class="card-text" th:text="${item.priority}"></p>
-					<a class="btn btn-primary btn-edit" th:href="@{/getOne/(id=${item.id})}">Edit</a>
+					<a class="btn btn-primary btn-edit" th:href="@{/getOne/(id=${item.id})}" draggable="true">Edit</a>
 					<a class="btn btn-danger btn-delete" th:href="@{/delete/(id=${item.id})}">Delete</a>
 				</div>
 			</div>
 		</div>
-		<div class="col col-sm" id="col-2">
+		<div class="col col-sm" id="col-doing">
 			<div class="card-header">
 				DOING
 			</div>
 			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
-				 th:if="${item.status} == 'DOING' and ${item.user.id} == ${userId}" draggable="true" id="card-2">
+				 th:if="${item.status} == 'DOING' and ${item.user.id} == ${userId}" draggable="true" th:id="${item.id}"
+				 th:href="@{/getOne/(id=${item.id})}">
 				<div class="card-body">
 					<h5 class="card-title" th:text="${item.name}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted"
@@ -44,12 +46,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="col col-sm" id="col-3">
+		<div class="col col-sm" id="col-done">
 			<div class="card-header">
 				DONE
 			</div>
 			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
-				 th:if="${item.status} == 'DONE' and ${item.user.id} == ${userId}" draggable="true" id="card-3">
+				 th:if="${item.status} == 'DONE' and ${item.user.id} == ${userId}" draggable="true" th:id="${item.id}"
+				 th:href="@{/getOne/(id=${item.id})}">
 				<div class="card-body">
 					<h5 class="card-title" th:text="${item.name}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted"
@@ -191,9 +194,37 @@
 						</div>
 						<input type="hidden" id="statusEdit" name="status" th:value="TODO"/>
 						<input type="hidden" id="userEdit" name="user" th:value="${userId}"/>
+						<!--TODO: Is th:value necessary-->
 						<div>
 							<button type="submit" class="btn btn-primary">Save item</button>
 						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="status-modal" tabindex="-1" aria-labelledby="edit-modal-title" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="status-modal-title">Edit Item</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form th:action="@{/update}" method="PUT" style="max-width: 600px; margin: 0 auto;">
+					<input type="hidden" id="id" name="id"/>
+					<input type="hidden" id="name" name="name"/>
+					<input type="hidden" id="dueDate" name="dueDate"/>
+					<input type="hidden" id="priority" name="priority"/>
+					<input type="hidden" id="newStatus" name="status"/>
+					<input type="hidden" id="user" name="user"/>
+					<div>
+						<button type="submit" class="btn btn-primary">Save item</button>
 					</div>
 				</form>
 			</div>
@@ -223,6 +254,7 @@
 	</div>
 </div>
 
+
 <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
@@ -233,7 +265,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
 		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
 </script>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+
+
+var newStatus;
+
 		$('document').ready(function () {
 			$(".btn-edit").on('click', function (event) {
 
@@ -248,10 +284,10 @@
 					$('#priorityEdit').val(item.priority)
 					$('#statusEdit').val(item.status)
 					$('#userEdit').val(item.user)
-
 				});
 
 				$('#edit-modal').modal('show');
+
 			});
 
 			$(".btn-delete").on('click', function (event) {
@@ -263,7 +299,29 @@
 				$('#delete-modal #delRef').attr('href', href);
 				$('#delete-modal').modal('show');
 			});
+
+			$(".card").on('dragend', function (event) {
+
+				event.preventDefault();
+
+				var href = $(this).attr('href');
+
+				$.get(href, function (item, status) {
+					$('#id').val(item.id)
+					$('#name').val(item.name)
+					$('#dueDate').val(item.dueDate)
+					$('#priority').val(item.priority)
+					$('#newStatus').val(newStatus)
+					$('#user').val(item.user)
+				});
+
+				console.log("asdsadads" + newStatus);
+				$('#status-modal').modal('show');
+
+			});
 		});
+
+
 
 
 document.addEventListener('dragstart', function(){
@@ -293,9 +351,15 @@ function beingDragged(ev) {
   draggedEl.classList.add("dragging");
 }
 function dragEnd(ev) {
+var dragOver = ev.target;
+	var dragOverParent = dragOver.parentElement;
+	var beingDragged = document.querySelector(".dragging");
   var draggedEl = ev.target;
   draggedEl.classList.remove("dragging");
+  var parentId = dragOverParent.id;
+  changeStatus(parentId, beingDragged);
 }
+
 function allowDrop(ev) {
   ev.preventDefault();
   //var project = document.getElementById('project');
@@ -317,6 +381,7 @@ function allowDrop(ev) {
   if (draggedParent !== dragOverParent) {
     dragOverParent.insertBefore(beingDragged, dragOver);
   }
+
 }
 function colDraggedOver(event) {
   var dragOver = event.target;
@@ -324,10 +389,9 @@ function colDraggedOver(event) {
   var draggedParent = beingDragged.parentElement;
   if (draggedParent.id !== dragOver.id && draggedParent.classList.contains('col') && dragOver.classList.contains('col')) {
     if (dragOver.childElementCount == 0 || event.clientY > dragOver.children[dragOver.childElementCount - 1].offsetTop) {
-      dragOver.appendChild(beingDragged)
+      dragOver.appendChild(beingDragged);
     }
   }
-
 }
 function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
@@ -344,9 +408,31 @@ function whichChild(el) {
   return i;
 }
 
+function changeStatus(parentId, beingDragged) {
 
+if (parentId == 'col-todo') {
+console.log(beingDragged.id);
+beingDragged.id = "card-todo"
+console.log(beingDragged.id);
+  	console.log("TODO");
+newStatus = "TODO";
+}
+  else if (parentId == 'col-doing') {
+  console.log(beingDragged.id);
+beingDragged.id = "card-doing"
 
-
+console.log(beingDragged.id);
+  	console.log("DOING");
+  	newStatus = "DOING";
+  }
+  else if (parentId == 'col-done') {
+  console.log(beingDragged.id);
+beingDragged.id = "card-done"
+console.log(beingDragged.id);
+  	console.log("DONE");
+newStatus = "DONE";
+  }
+}
 
 
 
