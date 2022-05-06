@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
@@ -61,27 +62,32 @@ public class ItemController {
 	}
 
 	@PostMapping("/new")
-	public String saveItem(Item item) {
+	public String saveItem(Item item, HttpServletRequest request) {
 
 		itemService.save(item);
 
-		return "redirect:/list";
+		String referer = request.getHeader("Referer");
+
+		return "redirect:" + referer;
 	}
+
 	@GetMapping("/update")
-	public String updateItem(Item item) {
+	public String updateItem(Item item, HttpServletRequest request) {
 
 		itemService.save(item);
 
-		return "redirect:/list";
+		String referer = request.getHeader("Referer");
+
+		return "redirect:" + referer;
 	}
 
 	@GetMapping("/delete")
-	public String delete(Long id) {
+	public String delete(Long id, HttpServletRequest request) {
 
 		itemService.deleteById(id);
 
-		return "redirect:/list";
+		String referer = request.getHeader("Referer");
+
+		return "redirect:" + referer;
 	}
-
-
 }

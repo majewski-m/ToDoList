@@ -351,7 +351,6 @@
 			draggedEl.classList.add("dragging");
 		}
 		function dragEnd(ev) {
-			console.log("inside dragend");
 			var dragOver = ev.target;
 			var dragOverParent = dragOver.parentElement;
 			var beingDragged = document.querySelector(".dragging");
@@ -412,13 +411,10 @@
 
 			if (parentId.substring(4) == beingDragged.id.substring(5)) {
 				sameColumn = true;
-				console.log(sameColumn);
 			}
 
 			else {
 				sameColumn = false;
-				console.log(sameColumn);
-
 
 				if (parentId == 'col-todo') {
 					beingDragged.id = "card-todo"
