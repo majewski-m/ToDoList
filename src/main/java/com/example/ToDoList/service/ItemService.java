@@ -15,7 +15,11 @@ public class ItemService {
 	private ItemRepository itemRepository;
 
 	public List<Item> findAllByOrderByDateAsc() {
-		return itemRepository.findAllByOrderByDueDateAsc();
+		return itemRepository.findAllByOrderByDueDateAscPriorityAsc();
+	}
+
+	public List<Item> findAllByOrderByPriorityAsc() {
+		return itemRepository.findAllByOrderByPriorityAscDueDateAsc();
 	}
 
 	public Item getOne(Long id) {

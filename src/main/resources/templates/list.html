@@ -4,271 +4,261 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="style.css">
 	<title>To Do List</title>
 </head>
 
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col col-sm" id="col-todo">
-			<div class="card-header">
-				TO DO
-			</div>
-			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
-				 th:if="${item.status} == 'TODO' and ${item.user.id} == ${userId}" draggable="true" id="${item.id}"
-				 th:href="@{/getOne/(id=${item.id})}">
-				<div class="card-body">
-					<h5 class="card-title" th:text="${item.name}"></h5>
-					<h6 class="card-subtitle mb-2 text-muted"
-						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
-					<p class="card-text" th:text="${item.priority}"></p>
-					<a class="btn btn-primary btn-edit" th:href="@{/getOne/(id=${item.id})}" draggable="true">Edit</a>
-					<a class="btn btn-danger btn-delete" th:href="@{/delete/(id=${item.id})}">Delete</a>
+	<div class="container">
+		<div class="row">
+			<div class="col col-sm" id="col-todo">
+				<div class="card-header">
+					TO DO
+				</div>
+				<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
+					th:if="${item.status} == 'TODO' and ${item.user.id} == ${userId}" draggable="true" id="card-todo"
+					th:href="@{/getOne/(id=${item.id})}">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${item.name}"></h5>
+						<h6 class="card-subtitle mb-2 text-muted"
+							th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
+						<p class="card-text" th:text="${item.priority}"></p>
+						<a class="btn btn-primary btn-edit" th:href="@{/getOne/(id=${item.id})}"
+							draggable="true">Edit</a>
+						<a class="btn btn-danger btn-delete" th:href="@{/delete/(id=${item.id})}">Delete</a>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col col-sm" id="col-doing">
-			<div class="card-header">
-				DOING
-			</div>
-			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
-				 th:if="${item.status} == 'DOING' and ${item.user.id} == ${userId}" draggable="true" th:id="${item.id}"
-				 th:href="@{/getOne/(id=${item.id})}">
-				<div class="card-body">
-					<h5 class="card-title" th:text="${item.name}"></h5>
-					<h6 class="card-subtitle mb-2 text-muted"
-						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
-					<p class="card-text" th:text="${item.priority}"></p>
-					<a class="btn btn-primary btn-edit" th:href="@{/getOne/(id=${item.id})}">Edit</a>
-					<a class="btn btn-danger btn-delete" th:href="@{/delete/(id=${item.id})}">Delete</a>
+			<div class="col col-sm" id="col-doing">
+				<div class="card-header">
+					DOING
+				</div>
+				<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
+					th:if="${item.status} == 'DOING' and ${item.user.id} == ${userId}" draggable="true"
+					th:id="card-doing" th:href="@{/getOne/(id=${item.id})}">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${item.name}"></h5>
+						<h6 class="card-subtitle mb-2 text-muted"
+							th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
+						<p class="card-text" th:text="${item.priority}"></p>
+						<a class="btn btn-primary btn-edit" th:href="@{/getOne/(id=${item.id})}">Edit</a>
+						<a class="btn btn-danger btn-delete" th:href="@{/delete/(id=${item.id})}">Delete</a>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col col-sm" id="col-done">
-			<div class="card-header">
-				DONE
-			</div>
-			<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
-				 th:if="${item.status} == 'DONE' and ${item.user.id} == ${userId}" draggable="true" th:id="${item.id}"
-				 th:href="@{/getOne/(id=${item.id})}">
-				<div class="card-body">
-					<h5 class="card-title" th:text="${item.name}"></h5>
-					<h6 class="card-subtitle mb-2 text-muted"
-						th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
-					<p class="card-text" th:text="${item.priority}"></p>
-					<a class="btn btn-primary btn-edit" th:href="@{/getOne/(id=${item.id})}">Edit</a>
-					<a class="btn btn-danger btn-delete" th:href="@{/delete/(id=${item.id})}">Delete</a>
+			<div class="col col-sm" id="col-done">
+				<div class="card-header">
+					DONE
+				</div>
+				<div class="card text-white bg-primary mb-3" th:each="item : ${items}"
+					th:if="${item.status} == 'DONE' and ${item.user.id} == ${userId}" draggable="true" th:id="card-done"
+					th:href="@{/getOne/(id=${item.id})}">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${item.name}"></h5>
+						<h6 class="card-subtitle mb-2 text-muted"
+							th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}">Card subtitle</h6>
+						<p class="card-text" th:text="${item.priority}"></p>
+						<a class="btn btn-primary btn-edit" th:href="@{/getOne/(id=${item.id})}">Edit</a>
+						<a class="btn btn-danger btn-delete" th:href="@{/delete/(id=${item.id})}">Delete</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal">
-	<i class="material-icons">&#xE147;</i>Add new</a>
+	<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal">
+		<i class="material-icons">&#xE147;</i>Add new</a>
+	<a class="btn btn-primary" th:href="@{/listPriority}">>
+		Sort By Priority</a>
+	<a class="btn btn-primary" th:href="@{/list}">>
+		Sort By Date</a>
 
-<table class="table table-bordered" style="float: left;">
-	<tr>
-		<th>Name</th>
-		<th>Due Date</th>
-		<th>Priority</th>
-		<th>Status</th>
-		<th>User ID</th>
-		<th>Action</th>
-	</tr>
-	<tbody>
+	<table class="table table-bordered" style="float: left;">
+		<tr>
+			<th>Name</th>
+			<th>Due Date</th>
+			<th>Priority</th>
+			<th>Status</th>
+			<th>User ID</th>
+			<th>Action</th>
+		</tr>
+		<tbody>
 
 
-	<tr th:each="item : ${items}">
+			<tr th:each="item : ${items}">
 
-		<td th:text="${item.name}"></td>
-		<td th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}"></td>
-		<td th:text="${item.priority}"></td>
-		<td th:text="${item.status}"></td>
-		<td th:text="${item.user.id}"></td>
-		<!--		<td>-->
-		<!--			<a th:href="@{/showFormForUpdate(id=${item.id})}" class="btn btn-primary">-->
-		<!--				Update-->
-		<!--			</a>-->
-		<!--			<a th:href="@{/delete(id=${item.id})}"-->
-		<!--			   onclick="if (!(confirm('Are you sure you want to delete this item?'))) return false"-->
-		<!--			   class="btn btn-warning">-->
-		<!--				Delete-->
-		<!--			</a>-->
-		<!--		</td>-->
-		<!--		<td>-->
-		<!--			<a th:href="@{/changeStatus(id=${todoItem.id})}" class="btn btn-info">-->
-		<!--				Change Status-->
-		<!--			</a>-->
-		<!--		</td>-->
+				<td th:text="${item.name}"></td>
+				<td th:text="${#temporals.format(item.dueDate, 'dd.MM.yyyy')}"></td>
+				<td th:text="${item.priority}"></td>
+				<td th:text="${item.status}"></td>
+				<td th:text="${item.user.id}"></td>
 
-	</tr>
-	</tbody>
-</table>
+			</tr>
+		</tbody>
+	</table>
 
-<div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="add-modal-title" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="add-modal-title">Create New Item</h5>
+	<div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="add-modal-title" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="add-modal-title">Create New Item</h5>
 
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form th:action="@{/new}" method="POST" style="max-width: 600px; margin: 0 auto;">
-					<div class="m-3">
-						<div class="form-group row m-3">
-							<label class="col-form-label col-4">Name</label>
-							<div class="col-8">
-								<input type="text" class="form-control" name="name" required minlength="1"
-									   maxlength="100">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{/new}" method="POST" style="max-width: 600px; margin: 0 auto;">
+						<div class="m-3">
+							<div class="form-group row m-3">
+								<label class="col-form-label col-4">Name</label>
+								<div class="col-8">
+									<input type="text" class="form-control" name="name" required minlength="1"
+										maxlength="100">
+								</div>
 							</div>
-						</div>
-						<div class="form-group row m-3">
-							<label class="col-form-label col-4">Due Date</label>
-							<div class="col-8">
-								<input type="date" name="dueDate" placeholder="Due date" required>
+							<div class="form-group row m-3">
+								<label class="col-form-label col-4">Due Date</label>
+								<div class="col-8">
+									<input type="date" name="dueDate" placeholder="Due date" required>
+								</div>
 							</div>
-						</div>
-						<div class="form-group row m-3">
-							<label class="col-form-label col-4">Priority</label>
-							<div class="col-8">
-								<select class="form-select" name="priority" required>
-									<option th:each="priority : ${T(com.example.ToDoList.entity.Priority).values()}"
+							<div class="form-group row m-3">
+								<label class="col-form-label col-4">Priority</label>
+								<div class="col-8">
+									<select class="form-select" name="priority" required>
+										<option th:each="priority : ${T(com.example.ToDoList.entity.Priority).values()}"
 											th:value="${priority}" th:text="${priority}"></option>
-								</select>
+									</select>
+								</div>
+							</div>
+
+							<input type="hidden" name="status" th:value="TODO" />
+							<input type="hidden" name="user" th:value="${userId}" />
+
+							<div>
+								<button type="submit" class="btn btn-primary">Add new item</button>
 							</div>
 						</div>
-
-						<input type="hidden" name="status" th:value="TODO"/>
-						<input type="hidden" name="user" th:value="${userId}"/>
-
-						<div>
-							<button type="submit" class="btn btn-primary">Add new item</button>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="edit-modal-title" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="edit-modal-title">Edit Item</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form th:action="@{/update}" method="PUT" style="max-width: 600px; margin: 0 auto;">
-					<input type="hidden" id="idEdit" name="id" th:value="${itemId}"/>
-					<div class="m-3">
-						<div class="form-group row m-3">
-							<label class="col-form-label col-4">Name</label>
-							<div class="col-8">
-								<input type="text" class="form-control" id="nameEdit" name="name" required
-									   minlength="1" maxlength="100">
+	<div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="edit-modal-title" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="edit-modal-title">Edit Item</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{/update}" method="PUT" style="max-width: 600px; margin: 0 auto;">
+						<input type="hidden" id="idEdit" name="id" th:value="${itemId}" />
+						<div class="m-3">
+							<div class="form-group row m-3">
+								<label class="col-form-label col-4">Name</label>
+								<div class="col-8">
+									<input type="text" class="form-control" id="nameEdit" name="name" required
+										minlength="1" maxlength="100">
+								</div>
 							</div>
-						</div>
-						<div class="form-group row m-3">
-							<label class="col-form-label col-4">Due Date</label>
-							<div class="col-8">
-								<input type="date" id="dueDateEdit" name="dueDate" placeholder="Due date" required>
+							<div class="form-group row m-3">
+								<label class="col-form-label col-4">Due Date</label>
+								<div class="col-8">
+									<input type="date" id="dueDateEdit" name="dueDate" placeholder="Due date" required>
+								</div>
 							</div>
-						</div>
-						<div class="form-group row m-3">
-							<label class="col-form-label col-4">Priority</label>
-							<div class="col-8">
-								<select class="form-select" id="priorityEdit" name="priority" required>
-									<option th:each="priority : ${T(com.example.ToDoList.entity.Priority).values()}"
+							<div class="form-group row m-3">
+								<label class="col-form-label col-4">Priority</label>
+								<div class="col-8">
+									<select class="form-select" id="priorityEdit" name="priority" required>
+										<option th:each="priority : ${T(com.example.ToDoList.entity.Priority).values()}"
 											th:value="${priority}" th:text="${priority}"></option>
-								</select>
+									</select>
+								</div>
+							</div>
+							<input type="hidden" id="statusEdit" name="status" th:value="TODO" />
+							<input type="hidden" id="userEdit" name="user" th:value="${userId}" />
+							<!--TODO: Is th:value necessary-->
+							<div>
+								<button type="submit" class="btn btn-primary">Save item</button>
 							</div>
 						</div>
-						<input type="hidden" id="statusEdit" name="status" th:value="TODO"/>
-						<input type="hidden" id="userEdit" name="user" th:value="${userId}"/>
-						<!--TODO: Is th:value necessary-->
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="status-modal" tabindex="-1" aria-labelledby="edit-modal-title" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="status-modal-title">Change Status</h5>
+				</div>
+				<div class="modal-body">
+					<h6>Are you sure you want to change the status?</h6>
+					<br>
+					<form th:action="@{/update}" method="PUT" style="max-width: 600px; margin: 0 auto;">
+						<input type="hidden" id="id" name="id" />
+						<input type="hidden" id="name" name="name" />
+						<input type="hidden" id="dueDate" name="dueDate" />
+						<input type="hidden" id="priority" name="priority" />
+						<input type="hidden" id="newStatus" name="status" />
+						<input type="hidden" id="user" name="user" />
 						<div>
-							<button type="submit" class="btn btn-primary">Save item</button>
+							<button type="submit" class="btn btn-primary">YES</button>
+							<a type="button" class="btn btn-warning" href="javascript:window.location.href=window.location.href">NO</a>
 						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+					</form>
+				</div>
+
 			</div>
 		</div>
 	</div>
-</div>
-<div class="modal fade" id="status-modal" tabindex="-1" aria-labelledby="edit-modal-title" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="status-modal-title">Edit Item</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form th:action="@{/update}" method="PUT" style="max-width: 600px; margin: 0 auto;">
-					<input type="hidden" id="id" name="id"/>
-					<input type="hidden" id="name" name="name"/>
-					<input type="hidden" id="dueDate" name="dueDate"/>
-					<input type="hidden" id="priority" name="priority"/>
-					<input type="hidden" id="newStatus" name="status"/>
-					<input type="hidden" id="user" name="user"/>
-					<div>
-						<button type="submit" class="btn btn-primary">Save item</button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+
+	<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Are you sure you want to delete this item?
+				</div>
+				<div class="modal-footer">
+					<a href="" type="button" class="btn btn-danger" id="delRef">Delete</a>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				Are you sure you want to delete this item?
-			</div>
-			<div class="modal-footer">
-				<a href="" type="button" class="btn btn-danger" id="delRef">Delete</a>
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 
-<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+		</script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
 		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
 		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-</script>
-<script type="text/javascript" th:inline="javascript">
+		</script>
+	<script type="text/javascript" th:inline="javascript">
 
 
-var newStatus;
+		var newStatus;
+		var sameColumn;
 
 		$('document').ready(function () {
 			$(".btn-edit").on('click', function (event) {
@@ -302,21 +292,31 @@ var newStatus;
 
 			$(".card").on('dragend', function (event) {
 
-				event.preventDefault();
+				var dragOver = event.target;
+				var dragOverParent = dragOver.parentElement;
+				var beingDragged = document.querySelector(".dragging");
+				var parentId = dragOverParent.id;
+				changeStatus(parentId, beingDragged);
 
-				var href = $(this).attr('href');
+				if (sameColumn == false) {
 
-				$.get(href, function (item, status) {
-					$('#id').val(item.id)
-					$('#name').val(item.name)
-					$('#dueDate').val(item.dueDate)
-					$('#priority').val(item.priority)
-					$('#newStatus').val(newStatus)
-					$('#user').val(item.user)
-				});
+					event.preventDefault();
 
-				console.log("asdsadads" + newStatus);
-				$('#status-modal').modal('show');
+					var href = $(this).attr('href');
+
+					$.get(href, function (item, status) {
+						$('#id').val(item.id)
+						$('#name').val(item.name)
+						$('#dueDate').val(item.dueDate)
+						$('#priority').val(item.priority)
+						$('#newStatus').val(newStatus)
+						$('#user').val(item.user)
+					});
+
+					$('#status-modal').modal({backdrop: 'static', keyboard: false});
+					$('#status-modal').modal('show');
+
+				}
 
 			});
 		});
@@ -324,119 +324,115 @@ var newStatus;
 
 
 
-document.addEventListener('dragstart', function(){
-    beingDragged(event);
-});
-document.addEventListener('dragend', function(){
-    dragEnd(event);
-});
-document.addEventListener('dragover', function(){
-   var beingDragged = document.querySelector(".dragging")
-  if (event.target.matches('.card')) {
-        if (beingDragged.classList.contains('card')) {
-          allowDrop(event);
-        }
-  }
-  if (event.target.matches('.col')) {
-    if (beingDragged.classList.contains('card')) {
-          colDraggedOver(event);
-    }
-    if (beingDragged.classList.contains('col')) {
-      allowDrop(event);
-    }
-  }
-});
-function beingDragged(ev) {
-  var draggedEl = ev.target;
-  draggedEl.classList.add("dragging");
-}
-function dragEnd(ev) {
-var dragOver = ev.target;
-	var dragOverParent = dragOver.parentElement;
-	var beingDragged = document.querySelector(".dragging");
-  var draggedEl = ev.target;
-  draggedEl.classList.remove("dragging");
-  var parentId = dragOverParent.id;
-  changeStatus(parentId, beingDragged);
-}
+		document.addEventListener('dragstart', function () {
+			beingDragged(event);
+		});
+		document.addEventListener('dragend', function () {
+			dragEnd(event);
+		});
+		document.addEventListener('dragover', function () {
+			var beingDragged = document.querySelector(".dragging")
+			if (event.target.matches('.card')) {
+				if (beingDragged.classList.contains('card')) {
+					allowDrop(event);
+				}
+			}
+			if (event.target.matches('.col')) {
+				if (beingDragged.classList.contains('card')) {
+					colDraggedOver(event);
+				}
+				if (beingDragged.classList.contains('col')) {
+					allowDrop(event);
+				}
+			}
+		});
+		function beingDragged(ev) {
+			var draggedEl = ev.target;
+			draggedEl.classList.add("dragging");
+		}
+		function dragEnd(ev) {
+			console.log("inside dragend");
+			var dragOver = ev.target;
+			var dragOverParent = dragOver.parentElement;
+			var beingDragged = document.querySelector(".dragging");
+			var draggedEl = ev.target;
+			draggedEl.classList.remove("dragging");
+			var parentId = dragOverParent.id;
+		}
 
-function allowDrop(ev) {
-  ev.preventDefault();
-  //var project = document.getElementById('project');
-  var dragOver = ev.target;
-  var dragOverParent = dragOver.parentElement;
-  var beingDragged = document.querySelector(".dragging");
-  var draggedParent = beingDragged.parentElement;
-  var project = document.getElementById("project");
-  var draggedIndex = whichChild(beingDragged);
-  var dragOverIndex = whichChild(dragOver);
-  if (draggedParent === dragOverParent) {
-    if (draggedIndex < dragOverIndex) {
-      draggedParent.insertBefore(dragOver, beingDragged);
-    }
-    if (draggedIndex > dragOverIndex) {
-      draggedParent.insertBefore(dragOver, beingDragged.nextSibling);
-    }
-  }
-  if (draggedParent !== dragOverParent) {
-    dragOverParent.insertBefore(beingDragged, dragOver);
-  }
+		function allowDrop(ev) {
+			ev.preventDefault();
+			//var project = document.getElementById('project');
+			var dragOver = ev.target;
+			var dragOverParent = dragOver.parentElement;
+			var beingDragged = document.querySelector(".dragging");
+			var draggedParent = beingDragged.parentElement;
+			var project = document.getElementById("project");
+			var draggedIndex = whichChild(beingDragged);
+			var dragOverIndex = whichChild(dragOver);
+			if (draggedParent === dragOverParent) {
+				if (draggedIndex < dragOverIndex) {
+					draggedParent.insertBefore(dragOver, beingDragged);
+				}
+				if (draggedIndex > dragOverIndex) {
+					draggedParent.insertBefore(dragOver, beingDragged.nextSibling);
+				}
+			}
+			if (draggedParent !== dragOverParent) {
+				dragOverParent.insertBefore(beingDragged, dragOver);
+			}
 
-}
-function colDraggedOver(event) {
-  var dragOver = event.target;
-  var beingDragged = document.querySelector(".dragging");
-  var draggedParent = beingDragged.parentElement;
-  if (draggedParent.id !== dragOver.id && draggedParent.classList.contains('col') && dragOver.classList.contains('col')) {
-    if (dragOver.childElementCount == 0 || event.clientY > dragOver.children[dragOver.childElementCount - 1].offsetTop) {
-      dragOver.appendChild(beingDragged);
-    }
-  }
-}
-function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-}
+		}
+		function colDraggedOver(event) {
+			var dragOver = event.target;
+			var beingDragged = document.querySelector(".dragging");
+			var draggedParent = beingDragged.parentElement;
+			if (draggedParent.id !== dragOver.id && draggedParent.classList.contains('col') && dragOver.classList.contains('col')) {
+				if (dragOver.childElementCount == 0 || event.clientY > dragOver.children[dragOver.childElementCount - 1].offsetTop) {
+					dragOver.appendChild(beingDragged);
+				}
+			}
+		}
+		function drag(ev) {
+			ev.dataTransfer.setData("text", ev.target.id);
+		}
 
-function drop(ev) {
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-}
-function whichChild(el) {
-  var i = 0;
-  while ((el = el.previousSibling) != null) ++i;
-  return i;
-}
+		function drop(ev) {
+			ev.preventDefault();
+			var data = ev.dataTransfer.getData("text");
+			ev.target.appendChild(document.getElementById(data));
+		}
+		function whichChild(el) {
+			var i = 0;
+			while ((el = el.previousSibling) != null) ++i;
+			return i;
+		}
 
-function changeStatus(parentId, beingDragged) {
+		function changeStatus(parentId, beingDragged) {
 
-if (parentId == 'col-todo') {
-console.log(beingDragged.id);
-beingDragged.id = "card-todo"
-console.log(beingDragged.id);
-  	console.log("TODO");
-newStatus = "TODO";
-}
-  else if (parentId == 'col-doing') {
-  console.log(beingDragged.id);
-beingDragged.id = "card-doing"
+			if (parentId.substring(4) == beingDragged.id.substring(5)) {
+				sameColumn = true;
+				console.log(sameColumn);
+			}
 
-console.log(beingDragged.id);
-  	console.log("DOING");
-  	newStatus = "DOING";
-  }
-  else if (parentId == 'col-done') {
-  console.log(beingDragged.id);
-beingDragged.id = "card-done"
-console.log(beingDragged.id);
-  	console.log("DONE");
-newStatus = "DONE";
-  }
-}
+			else {
+				sameColumn = false;
+				console.log(sameColumn);
 
 
-
-</script>
-
-
+				if (parentId == 'col-todo') {
+					beingDragged.id = "card-todo"
+					newStatus = "TODO";
+				}
+				else if (parentId == 'col-doing') {
+					beingDragged.id = "card-doing"
+					newStatus = "DOING";
+				}
+				else if (parentId == 'col-done') {
+					beingDragged.id = "card-done"
+					newStatus = "DONE";
+				}
+			}
+		}
+	</script>
 </body>

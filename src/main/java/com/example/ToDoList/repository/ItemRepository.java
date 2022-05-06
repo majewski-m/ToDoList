@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-	List<Item> findAllByOrderByDueDateAsc();
+	List<Item> findAllByOrderByDueDateAscPriorityAsc();
+
+	List<Item> findAllByOrderByPriorityAscDueDateAsc();
 
 }

@@ -35,7 +35,21 @@ public class ItemController {
 		model.addAttribute("items", items);
 		model.addAttribute("userId", userId);
 
-		model.addAttribute("status", getOne(1L).getStatus());
+		return "list";
+	}
+
+
+	@GetMapping("/listPriority")
+	public String listByPriority(Model model) {
+
+		List<Item> items = itemService.findAllByOrderByPriorityAsc();
+
+//		Long userId = userService.findIdOfCurrentUser();
+
+		Long userId = 1L; //TODO: DELETE IT AFTER TESTING
+
+		model.addAttribute("items", items);
+		model.addAttribute("userId", userId);
 
 		return "list";
 	}
