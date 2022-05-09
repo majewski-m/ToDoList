@@ -18,6 +18,10 @@ public class ItemService {
 		return itemRepository.findAllByOrderByDueDateAscPriorityAsc();
 	}
 
+	public List<Item> findAllByOrderByDateDesc() {
+		return itemRepository.findAllByOrderByDueDateAscPriorityAsc();
+	}
+
 	public List<Item> findAllByOrderByPriorityAsc() {
 		return itemRepository.findAllByOrderByPriorityAscDueDateAsc();
 	}

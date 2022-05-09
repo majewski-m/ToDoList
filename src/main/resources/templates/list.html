@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col col-sm" id="col-todo">
+			<div class="col col-4" id="col-todo">
 				<div class="card-header">
 					TO DO
 				</div>
@@ -30,7 +30,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col col-sm" id="col-doing">
+			<div class="col col-4" id="col-doing">
 				<div class="card-header">
 					DOING
 				</div>
@@ -47,7 +47,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col col-sm" id="col-done">
+			<div class="col col-4" id="col-done">
 				<div class="card-header">
 					DONE
 				</div>
@@ -103,7 +103,6 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="add-modal-title">Create New Item</h5>
-
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
@@ -182,7 +181,15 @@
 									</select>
 								</div>
 							</div>
-							<input type="hidden" id="statusEdit" name="status" th:value="TODO" />
+							<div class="form-group row m-3">
+								<label class="col-form-label col-4">Status</label>
+								<div class="col-8">
+									<select class="form-select" id="statusEdit" name="status" required>
+										<option th:each="status : ${T(com.example.ToDoList.entity.Status).values()}"
+												th:value="${status}" th:text="${status}"></option>
+									</select>
+								</div>
+							</div>
 							<input type="hidden" id="userEdit" name="user" th:value="${userId}" />
 							<!--TODO: Is th:value necessary-->
 							<div>
@@ -198,7 +205,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="status-modal" tabindex="-1" aria-labelledby="edit-modal-title" aria-hidden="true">
+	<div class="modal fade" id="status-modal" tabindex="-1" aria-labelledby="status-modal-title" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">

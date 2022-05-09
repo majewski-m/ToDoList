@@ -1,19 +1,14 @@
 package com.example.ToDoList.controller;
 
 import com.example.ToDoList.entity.Item;
-import com.example.ToDoList.entity.User;
 import com.example.ToDoList.service.ItemService;
 import com.example.ToDoList.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -21,6 +16,7 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
+
 	@Autowired
 	private UserService userService;
 
@@ -39,6 +35,21 @@ public class ItemController {
 		return "list";
 	}
 
+	@GetMapping("/archive")
+	public String archive(Model model) {
+
+		List<Item> items = itemService.findAllByOrderByDateDesc();
+
+//		Long userId = userService.findIdOfCurrentUser();
+
+		Long userId = 1L; //TODO: DELETE IT AFTER TESTING
+
+		model.addAttribute("items", items);
+		model.addAttribute("userId", userId);
+
+		return "archive";
+	}
+
 
 	@GetMapping("/listPriority")
 	public String listByPriority(Model model) {
@@ -53,6 +64,21 @@ public class ItemController {
 		model.addAttribute("userId", userId);
 
 		return "list";
+	}
+
+	@GetMapping("/archivePriority")
+	public String archiveByPriority(Model model) {
+
+		List<Item> items = itemService.findAllByOrderByPriorityAsc();
+
+//		Long userId = userService.findIdOfCurrentUser();
+
+		Long userId = 1L; //TODO: DELETE IT AFTER TESTING
+
+		model.addAttribute("items", items);
+		model.addAttribute("userId", userId);
+
+		return "archive";
 	}
 
 	@GetMapping("/getOne")
@@ -75,7 +101,6 @@ public class ItemController {
 	public String updateItem(Item item, HttpServletRequest request) {
 
 		itemService.save(item);
-
 		String referer = request.getHeader("Referer");
 
 		return "redirect:" + referer;
