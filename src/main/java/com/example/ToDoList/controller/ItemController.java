@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -31,6 +32,7 @@ public class ItemController {
 
 		model.addAttribute("items", items);
 		model.addAttribute("userId", userId);
+		model.addAttribute("today", LocalDate.now());
 
 		return "list";
 	}
@@ -47,6 +49,7 @@ public class ItemController {
 		model.addAttribute("items", items);
 		model.addAttribute("userId", userId);
 
+
 		return "archive";
 	}
 
@@ -62,6 +65,7 @@ public class ItemController {
 
 		model.addAttribute("items", items);
 		model.addAttribute("userId", userId);
+		model.addAttribute("today", LocalDate.now());
 
 		return "list";
 	}

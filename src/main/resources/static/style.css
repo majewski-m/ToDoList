@@ -2,3 +2,13 @@
 .dragging {
   opacity: 0.5;
 }
+
+.card-header {
+	text-align: center;
+}
+
+.card-archive {
+	background-color: black;
+}
+
+
