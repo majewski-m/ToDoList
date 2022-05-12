@@ -46,9 +46,21 @@ CREATE TABLE `items` (
 LOCK TABLES `items` WRITE;
 
 INSERT INTO `items` VALUES
-	(1, 'Create database', '2022-04-20', 'CRITICAL', 'DONE', 1),
-	(2, 'Write project logic', '2022-04-23', 'IMPORTANT', 'DOING', 1),
-    (3, 'Test the project', '2022-04-29', 'LOW', 'TODO', 2);
+	(1, 'SQL script for User', '2022-05-07', 'MEDIUM', 'DONE', 1),
+	(2, 'User entity', '2022-05-08', 'HIGH', 'DONE', 1),
+	(3, 'Security logic', '2022-05-09', 'CRITICAL', 'DONE', 1),
+	(4, 'User Controller', '2022-05-10', 'HIGH', 'DONE', 1),
+	(5, 'Registration', '2022-05-11', 'HIGH', 'DONE', 1),
+	(6, 'Login', '2022-05-11', 'HIGH', 'DONE', 1),
+	(7, 'Item entity', '2022-05-11', 'CRITICAL', 'DOING', 1),
+    (8, 'SQL script for Item', '2022-05-13', 'MEDIUM', 'DOING', 1),
+    (9, 'Item Controller', '2022-05-13', 'CRITICAL', 'DOING', 1),
+    (10, 'List HTML file', '2022-05-15', 'HIGH', 'TODO', 1),
+    (11, 'CRUD operations', '2022-05-16', 'CRITICAL', 'TODO', 1),
+    (12, 'Drag and Drop', '2022-05-16', 'MEDIUM', 'TODO', 1),
+    (13, 'Archive', '2022-05-16', 'MEDIUM', 'TODO', 1),
+    (14, 'Unique E-mails', '2022-05-17', 'MINOR', 'TODO', 1),
+    (15, 'Testing', '2022-05-18', 'CRITICAL', 'TODO', 1);
 
 UNLOCK TABLES;
 

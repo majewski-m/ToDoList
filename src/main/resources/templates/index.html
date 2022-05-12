@@ -6,14 +6,16 @@
 	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
 </head>
 <body>
+
 <div class="container text-center">
 	<div>
-		<h1>Welcome</h1>
+		<h1 class="mt-5">TO DO LIST</h1>
 	</div>
 	<div>
-		<h3><a th:href="@{/signup}">Sign Up</a></h3>
-		<h3><a th:href="@{/login}">Login</a></h3>
+		<h3><a class="btn btn-lg btn-primary my-2" th:href="@{/signup}">Sign Up</a></h3>
+		<h3><a class="btn btn-lg btn-success" th:href="@{/login}">Sign In</a></h3>
 	</div>
+	<img th:src="@{images/ExampleTable.png}" width="1902" height="1334" class="img-fluid d-block w-100 my-5" alt="Table" />
 </div>
 </body>
 </html>

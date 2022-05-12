@@ -16,15 +16,6 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 
-	public Long findIdOfCurrentUser() {
-
-		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-
-		User user = findUserByEmail(email);
-
-		return user.getId();
-	}
-
 	public void save(User user) {
 		userRepository.save(user);
 	}

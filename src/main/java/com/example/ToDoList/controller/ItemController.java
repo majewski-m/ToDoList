@@ -18,20 +18,12 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 
-	@Autowired
-	private UserService userService;
-
 	@GetMapping("/list")
 	public String list(Model model) {
 
 		List<Item> items = itemService.findAllByOrderByDateAsc();
 
-//		Long userId = userService.findIdOfCurrentUser();
-
-		Long userId = 1L; //TODO: DELETE IT AFTER TESTING
-
 		model.addAttribute("items", items);
-		model.addAttribute("userId", userId);
 		model.addAttribute("today", LocalDate.now());
 
 		return "list";
@@ -42,13 +34,7 @@ public class ItemController {
 
 		List<Item> items = itemService.findAllByOrderByDateDesc();
 
-//		Long userId = userService.findIdOfCurrentUser();
-
-		Long userId = 1L; //TODO: DELETE IT AFTER TESTING
-
 		model.addAttribute("items", items);
-		model.addAttribute("userId", userId);
-
 
 		return "archive";
 	}
@@ -59,12 +45,7 @@ public class ItemController {
 
 		List<Item> items = itemService.findAllByOrderByPriorityAsc();
 
-//		Long userId = userService.findIdOfCurrentUser();
-
-		Long userId = 1L; //TODO: DELETE IT AFTER TESTING
-
 		model.addAttribute("items", items);
-		model.addAttribute("userId", userId);
 		model.addAttribute("today", LocalDate.now());
 
 		return "list";
@@ -75,12 +56,7 @@ public class ItemController {
 
 		List<Item> items = itemService.findAllByOrderByPriorityAsc();
 
-//		Long userId = userService.findIdOfCurrentUser();
-
-		Long userId = 1L; //TODO: DELETE IT AFTER TESTING
-
 		model.addAttribute("items", items);
-		model.addAttribute("userId", userId);
 
 		return "archive";
 	}
