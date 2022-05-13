@@ -16,6 +16,7 @@ ToDoList is a simple app to make your task management much more simple.
 * Java
 * Spring
 * Hibernate
+* Thymeleaf
 * MySQL
 * HTML
 * CSS
